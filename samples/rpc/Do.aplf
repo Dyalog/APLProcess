@@ -1,0 +1,15 @@
+ r←Do stmt;rc;obj;evt;data;resp
+⍝ send an RPC statement to be executed remotely
+ :If 0=⎕NC'RPCClt'
+ :OrIf {0::1 ⋄ 0≠⊃RPCClt.Describe'.'}''
+     'RPC is not initialized. Use ∇Run'⎕SIGNAL 223
+ :EndIf
+ :If 0≠⊃rc←RPCClt.Send'RPCClient'stmt
+     ('Error sending "',stmt,'": ',⍕rc)⎕SIGNAL 224
+ :EndIf
+ :If 0≠⊃(rc obj evt data)←4↑resp←RPCClt.Wait'RPCClient' 10000 ⍝ wait up to 10 seconds for response
+ :OrIf 'Timeout'≡evt
+     ('Error waiting on "',stmt,'": ',⍕resp)⎕SIGNAL 225
+ :EndIf
+
+ r←data ⍝ data is (⎕DM if error occurred)(result of ⍎stmt)

@@ -1,0 +1,4 @@
+﻿ Log msg
+⍝ All intentional RPC output uses Log
+⍝ Log can be modified to send output to a file for debugging, especially when using a runtime interpreter
+ ⎕←msg

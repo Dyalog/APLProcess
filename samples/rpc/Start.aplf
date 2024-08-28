@@ -1,0 +1,47 @@
+ (rc msg)←Start args;rc;msg;port;threaded;runtime;rideable;detach;⎕ML;⎕IO
+⍝ simple Remote Procedure Call (RPC) example using APLProcess
+⍝ args is:
+⍝ [1] the port for the child process to start a command mode Conga server on (default 8888)
+⍝ [2] should the Conga listening loop in the child process run in a separate thread? (default 0 = no)
+⍝ [3] should the child process allow RIDE connections? either a Boolean (0/1) or a port number is allowed  (default 0 = no RIDE)
+⍝ [4] should the child process terminate when the APLProcess instance goes away? (default 0)
+⍝ [5] use a runtime interpreter? (default 0 = no)
+⍝
+ (⎕IO ⎕ML)←1
+ (rc msg)←¯1 ''
+ :If 0≠⊃(rc msg)←CongaInit'RPCClt'
+     msg←'Could not initialize Conga due to: ',∊⍕msg
+     →0
+ :EndIf
+
+ (port threaded rideable detach runtime)←5↑args,(≢args)↓8888 0 0 0 0
+ :If threaded∧runtime
+     msg←'Cannot run threaded listener with a runtime interpreter'
+     →0
+ :EndIf
+
+⍝ create and configure the instance of APLProcess
+ RPC_Process←APLProcess.New''
+ RPC_Process.Ws←⎕WSID                              ⍝ workspace to load
+ RPC_Process.Args←'RPC_Port=',⍕port                ⍝ port to use
+ RPC_Process.Args,←' RPC_Threaded=',⍕threaded      ⍝ run the server in a thread in the child process?
+ RPC_Process.RunTime←runtime                       ⍝ use runtime interpreter?
+ RPC_Process.RideInit←''(port+1)rideable⊃⍨0 1⍸rideable ⍝ RIDE port
+ RPC_Process.Detach←~detach                        ⍝ don't kill child process when p goes away
+
+⍝ try to launch the child process
+ :If 0≠⊃(rc msg)←RPC_Process.Run
+     msg←'Failed to start APL process due to: ',∊⍕msg
+     →0
+ :EndIf
+
+ ⎕DL 2 ⍝ pause to let child process initialize
+ :If ~RPC_Process.HasExited ⍝ check to make sure the child process is there
+     :If 0=⊃rc←RPCClt.Clt'RPCClient' 'localhost'port'Command'
+         msg←'Connected to RPC Server on port ',⍕port
+         msg,←rideable/(⎕UCS 13),'RIDE available on port ',⍕1+port
+         rc←0
+     :Else
+         msg←'Could not connect to RPC Server on port ',(⍕port),' due to ',∊⍕(4↑rc)[1 3 4]
+     :EndIf
+ :EndIf

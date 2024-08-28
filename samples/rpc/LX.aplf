@@ -1,0 +1,7 @@
+﻿ LX
+ :If 0∊⍴GetEnv'RPC_Port'
+     Log'Sample Remote Procedure Call (RPC) application demonstrating the use of APLProcess'
+     Log'Use Start '''' to start the application with default settings.'
+ :Else
+     Server''
+ :EndIf

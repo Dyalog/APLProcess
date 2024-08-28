@@ -1,0 +1,19 @@
+﻿ Stop;killed
+⍝ Stops RPC and cleans up
+ :If 0≠⎕NC'RPCClt'
+     {0::{}RPCClt.Close'.'}''
+     ⎕EX'RPCClt'
+     Log'RPC Client closed and expunged'
+ :EndIf
+ :If 9=⎕NC'RPC_Process'
+     killed←RPC_Process.Kill
+     Log'RPC Server process ',(4×killed)↓'NOT terminated'
+     ⎕EX killed/'RPC_Process'
+ :EndIf
+ :If 9=⎕NC'Conga'
+     :If 0∊⍴Conga.RootNames
+         Conga.UnloadSharedLib
+         ⎕EX'Conga'
+         Log'Conga shared library unloaded and Conga was erased'
+     :EndIf
+ :EndIf

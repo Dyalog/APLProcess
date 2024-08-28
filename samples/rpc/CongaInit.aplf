@@ -1,0 +1,36 @@
+﻿ (rc msg)←CongaInit rootname;r;⎕IO;⎕ML;path;ws
+ (⎕IO ⎕ML)←1
+
+ rc←¯1 ⋄ msg←''
+
+ :Select ⎕NC⊂,rootname
+ :Case 0 ⍝ if rootname doesn't exist
+     :If 0=⎕NC'Conga' ⍝ does Conga exist?
+         path←(⊃1 ⎕NPARTS⊃2 ⎕NQ'.' 'GetCommandLineArgs'),'/ws/' ⍝ use full path as runtime interpreters do not necessarily have WSPath set
+         :Trap 11
+             'Conga'⎕CY ws←path,'conga' ⍝ copy in Conga
+         :Else
+             msg←'Could not copy Conga from "',ws,'" workspace due to ',⎕DMX.(EM,': ',Message)
+             →0
+         :EndTrap
+     :EndIf
+
+     :Trap 999 ⍝ 999 signalled by Conga.Init
+         ⍎rootname,'←Conga.Init ''',rootname,''''
+         msg←'Conga root "',rootname,'" initialized'
+     :Else
+         msg←'Could not initialize Conga root "',rootname,'" due to ',⎕DMX.(EM,': ',Message)
+         →0
+     :EndTrap
+     :If 0≠⊃r←(⍎rootname).SetProp'.' 'EventMode' 1
+         msg←'Error setting EventMode on "',rootname,'": ',∊⍕(4↑r)[1 3 4]
+         →0
+     :EndIf
+     rc←0
+ :Case 9.2 ⍝ root already exists
+     :If 0≠rc←{0::¯1 ⋄ ⊃((⍎⍵).Describe'.')}rootname
+         msg←'"',rootname,'" is not properly initialized'
+     :EndIf
+ :Else
+     msg←'"',rootname,'" is not an instance of Conga.LIB?'
+ :EndSelect

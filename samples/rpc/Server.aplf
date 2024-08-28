@@ -1,0 +1,83 @@
+﻿ Server args;⎕IO;⎕ML;Port;rc;data;event;obj;wait;threaded;t;exec;msg;port
+⍝ Light-weight RPC command mode server for testing APLProcess
+⍝ args is [port] [threaded]
+⍝   port is the port number on which to start the RPC server
+⍝   threaded is a Boolean indicating whether to run the listener in a separate threaded
+⍝ If args is empty, we look for environment variables "RPC_Port" and "RPC_Threaded"
+⍝ If no port is defined either in args or via RPC_Port, the user has 10 seconds to press enter to keep APL from closing
+⍝
+⍝ N.B. the client sends statements to execute via Conga "command" mode
+⍝      no checking is done on the statements, so things like '→' or '⎕OFF' will have the expected effect
+
+ (⎕IO ⎕ML)←1
+ (port threaded)←2↑args,(≢args)↓⍬ 0
+ :Trap 0
+     :If 0∊⍴port ⍝ port supplied?
+         :If 0∊⍴port←GetEnv'RPC_Port' ⍝ if not, is there an environment variable?
+             Log'No port specified' ⍝ if not, bail out
+             →∆END
+         :EndIf
+         threaded←⊃⊃(//)⎕VFI GetEnv'RPC_Threaded'
+     :EndIf
+
+     :If threaded≠2 ⍝ 2 indicates that we've started in a thread and jump to listening
+         :If 0∊⍴Port←⊃(//)⎕VFI⍕port ⍝ do some minimal checking on the port
+             Log'Port "',port,'" is not valid'
+             →∆END
+         :EndIf
+
+         :If 0≠⊃(rc msg)←CongaInit'RPCSrv'
+             Log'Could not initialize Conga due to: ',∊⍕msg
+             →∆END
+         :EndIf
+
+         :If 0≠⊃rc←##.RPCSrv.Srv'RPCServer' ''Port'Command'  ⍝ start the server
+             Log'Unable to start RPC server: ',⍕rc
+             →∆END
+         :Else
+             Log'Command Mode RPC Server started on port ',⍕port
+         :EndIf
+         ##.STOP←0
+         :If threaded=1
+             Server&Port 2
+             →0
+         :EndIf
+     :EndIf
+
+     exec←{0::(↑1 7 7↓¨⎕DM)(⍕⍵) ⋄ ''(##.⍎⍕⍵)}
+     :While ~##.STOP
+         (rc obj event data)←4↑wait←##.RPCSrv.Wait'RPCServer' 1000 ⍝ Time out now and again
+         :Select rc
+         :Case 0
+             :Select event
+             :Case 'Connect' ⍝ ignore
+             :Case 'Receive'
+                 :If 0≠⊃rc←##.RPCSrv.Respond obj(exec data)
+                     Log'Error in RPCSrv.Respond: ',∊⍕rc
+                     →∆WAIT
+                 :EndIf
+             :Case 'Timeout'
+             :Else  ⍝ Anything unexpected
+                 Log'Unexpected "',event,'" event in RPCSrv.Wait, closing connection.'
+                 {}##.RPCSrv.Close obj
+             :EndSelect
+         :Else
+             Log'Error in RPCSrv.Wait: ',∊⍕wait
+         :EndSelect
+     :EndWhile
+     {}##.RPCSrv.Close'RPCServer'
+     Log'RPCServer terminated.'
+ :Else ⍝ :Trap
+     Log'Unexpected error:'
+     Log(↑⎕DM)
+     {0:: ⋄ ##.RPCSrv.Close'RPCServer'}⍬
+ :EndTrap
+
+∆END:
+ ⎕RTL←10
+ ⍞←'Press Enter within 10 seconds to keep APL from closing...'
+ :Trap 1006
+     {}⍞
+ :Else
+     ⎕OFF
+ :EndTrap

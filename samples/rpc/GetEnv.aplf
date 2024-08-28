@@ -1,0 +1,3 @@
+﻿ r←GetEnv name
+⍝ retrieve value of environment variable "name"
+ r←2 ⎕NQ'.' 'GetEnvironment'name
