@@ -1,0 +1,1149 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../img/favicon-32.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Shared Methods - APLProcess</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings2.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings3.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings4.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings5.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings6.css">
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../css/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#new" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="APLProcess" class="md-header__button md-logo" aria-label="APLProcess" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APLProcess
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Shared Methods
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dyalog/APLProcess" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dyalog/APLProcess
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="APLProcess" class="md-nav__button md-logo" aria-label="APLProcess" data-md-component="logo">
+      
+  <img src="../img/dyalog-white.svg" alt="logo">
+
+    </a>
+    APLProcess
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dyalog/APLProcess" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dyalog/APLProcess
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../userguide/" class="md-nav__link">
+        User Guide
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instance/" class="md-nav__link">
+        APLProcess Instance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Shared Methods
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Shared Methods
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    New
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    Version
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getcurrentexecutable" class="md-nav__link">
+    GetCurrentExecutable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getcurrentprocessid" class="md-nav__link">
+    GetCurrentProcessId
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isaix" class="md-nav__link">
+    IsAIX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ismac" class="md-nav__link">
+    IsMac
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isnetcore" class="md-nav__link">
+    IsNetCore
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isrunning" class="md-nav__link">
+    IsRunning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswin" class="md-nav__link">
+    IsWin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#killchildren" class="md-nav__link">
+    KillChildren
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listprocesses" class="md-nav__link">
+    ListProcesses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mydnsname" class="md-nav__link">
+    MyDNSName
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    Platform
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processusingport" class="md-nav__link">
+    ProcessUsingPort
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usingsystemdiagnostics" class="md-nav__link">
+    UsingSystemDiagnostics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_sh" class="md-nav__link">
+    _SH
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Samples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Samples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Samples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../samples/" class="md-nav__link">
+        Sample Uses
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LICENSE/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/" class="md-nav__link">
+        Release Notes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../print_page/" class="md-nav__link">
+        Print
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    New
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    Version
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getcurrentexecutable" class="md-nav__link">
+    GetCurrentExecutable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getcurrentprocessid" class="md-nav__link">
+    GetCurrentProcessId
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isaix" class="md-nav__link">
+    IsAIX
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ismac" class="md-nav__link">
+    IsMac
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isnetcore" class="md-nav__link">
+    IsNetCore
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isrunning" class="md-nav__link">
+    IsRunning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iswin" class="md-nav__link">
+    IsWin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#killchildren" class="md-nav__link">
+    KillChildren
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listprocesses" class="md-nav__link">
+    ListProcesses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mydnsname" class="md-nav__link">
+    MyDNSName
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    Platform
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processusingport" class="md-nav__link">
+    ProcessUsingPort
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usingsystemdiagnostics" class="md-nav__link">
+    UsingSystemDiagnostics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_sh" class="md-nav__link">
+    _SH
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/dyalog/APLProcess/edit/master/docs/shared-methods.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Shared Methods</h1>
+
+<p>Shared methods are functions that can be accessed from the <code>APLProcess</code> class itself as well as from an instance of <code>APLProcess</code>. Most of the shared methods are used for diagnostic and informational purposes. The two most-commonly-used methods, <code>New</code> and <code>Version</code>, are presented first. The remaining methods are primarily intended for diagnostic and debugging and are presented in alphbetical order.</p>
+<h3 id="new"><code>New</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>New</code> creates and returns a new instance of <code>APLProcess</code>.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>p←APLProcess.New args</code> where <ul><li><code>args</code> are the settings for the <code>APLProcess</code> instance as described in <a href="../instance/#settings">APLProcess Instance</a></li><li><code>p</code> is the <code>APLProcess</code> instance</li></ul></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>Using positional arguments:<br><code>p←APLProcess.New '/myApp' 'DYALOG_NETCORE=1' 0 4502</code><br><br>Using a namespace argument:<br><code>ns←⎕NS ''</code><br><code>ns.(Ws Args RideInit)←'/myApp' 'DYALOG_NETCORE' 4502</code><br><code>p←APLProcess.New ns</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td><code>APLProcess.New</code> is an alternative to using <code>⎕NEW</code>. The difference between using <code>⎕NEW</code> and <code>APLProcess.New</code> with arguments is that <code>⎕NEW</code> will automatically the child APL process whereas <code>APLProcess.New</code> will not.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="version"><code>Version</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>Version</code> returns version information for <code>APLProcess</code>. It returns a 3-element array of [1] <code>'APLProcess'</code> [2] The version number in the format major.minor.patch [3] The date of the version in the format YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>ver←APLProcess.Version</code></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.Version</code><br>&ensp;<code>APLProcess  2.3.0  2024-07-06</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="getcurrentexecutable"><code>GetCurrentExecutable</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>GetCurrentExecutable</code> returns the full path to the current Dyalog APL executable.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>ver←APLProcess.Version</code></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.GetCurrentExecutable</code><br><code>C:\Program Files\Dyalog\Dyalog APL-64 19.0 Unicode\dyalog.exe</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="getcurrentprocessid"><code>GetCurrentProcessId</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>GetCurrentProcessId</code> returns the process ID for the current process.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>ver←APLProcess.GetCurrentProcessId</code></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.GetCurrentProcessId</code><br><code>28288</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="isaix"><code>IsAIX</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>IsAIX</code> returns <code>1</code> if the current platform is AIX, <code>0</code> otherwise.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>ver←APLProcess.IsAIX</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ismac"><code>IsMac</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>IsMac</code> returns <code>1</code> if the current platform is macOS, <code>0</code> otherwise.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>ver←APLProcess.IsMac</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="isnetcore"><code>IsNetCore</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>IsNetCore</code> returns <code>1</code> if the current platform is using .NET, <code>0</code> otherwise.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>ver←APLProcess.IsNetCore</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td>Given the schizophrenic naming of .NET by Microsoft, .NET Core is now known as just .NET, not to be confused .NET Framework, which sounds like it should also be .NET, but it's not. Got it?</td>
+</tr>
+</tbody>
+</table>
+<h3 id="isrunning"><code>IsRunning</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>IsRunning</code> returns <code>1</code> if the process identified by its arguments is currently running, <code>0</code> otherwise.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>APLProcess.IsRunning pid [exe] [startTS]</code> where<ul><li><code>pid</code> is the process ID (required)</li><li><code>exe</code> is the executable name (optional, Windows only)</li><li><code>startTS</code> is the process's start time in <code>⎕TS</code> format (optional, Windows only) </li></ul></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.IsRunning 28288 'dyalog' ⍝ Windows only</code><br><code>1</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.(IsRunning GetCurrentProcessId) ⍝ should always return 1</code><br><code>1</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td>On non-Windows platforms, the <code>pid</code> is the only argument available.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="iswin"><code>IsWin</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>IsWin</code> returns <code>1</code> if the current platform is Windows, <code>0</code> otherwise.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>ver←APLProcess.Version</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="killchildren"><code>KillChildren</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>KillChildren</code> will attempt to terminate all child processes running a specific executable process name.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>r←APLProcess.KillChildren exe</code> where<ul><li><code>exe</code> is the name of the process(es) to terminate.</li><li><code>r</code> is a 2-column matrix containing information for processes that were not successfully terminated. The columns contain <code>[;1]</code> the process id <code>[;2]</code> the process name.</li></ul></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.KillChildren 'dyalog' ⍝ terminal all dyalog processes started by this process</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td><code>KillChildren</code> is intended to be a utility to help clean up child processes that are still running after their <code>APLProcess</code> instance has been expunged as would be the case if <a href="../instance/#detach"><code>Detach</code></a> is set to <code>1</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="listprocesses"><code>ListProcesses</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>ListProcesses</code> returns process ids and names.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>r←{all} APLProcess.ListProcesses procName</code> where <ul><li><code>procName</code> is the name of the process(es) to return, or <code>''</code> for all processes</li><li><code>all</code> is optional and set to <code>1</code> to return all matching processes, otherwise <code>ListProcesses</code> will return only child processes of the current process (the default).</li><li><code>r</code> is a 2-column matrix of <code>[;1]</code> process ids, <code>[;2]</code> process names</li></ul></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.ListProcesses 'dyalog'</code><br><code>31568   dyalog</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>≢1 APLProcess.ListProcesses '' ⍝ how many processes running?</code> <br><code>350</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td><code>ListProcesses</code> excludes the current process from its result.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mydnsname"><code>MyDNSName</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>MyDNSName</code> returns the computer name when running on Windows or host name when running on non-Windows platforms.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>r←APLProcess.MyDNSName</code></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.MyDNSName</code><br><code>my-computer-name</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="platform"><code>Platform</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>Platform</code> returns a 3-character vector indicating the current platform. It is literally <code>3↑⊃#.⎕WG 'APLVersion'</code>.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>r←APLProcess.Platform</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="processusingport"><code>ProcessUsingPort</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>ProcessUsingPort</code> returns the process id that is listening on the port number passed as the argument.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>r←APLProcess.ProcessUsingPort port</code> where <ul><li><code>port</code> is an integer port number</li><li><code>r</code> is the process id, if any, listening on <code>port</code></li></ul></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.ProcessUsingPort 8080</code><br><code>26702</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td><code>ProcessUsingPort</code> can be useful for identifying a process that's already using a port you expected to be available.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stop"><code>Stop</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>Stop</code> attempts to terminate the process identified by the process id passed as the argument; returning <code>1</code> if the process was terminated, <code>0</code> otherwise.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>r←APLProcess.Stop pid</code> where<ul><li><code>pid</code> is the process id of the process to be terminated</li><li><code>r</code> is a Boolean where <code>1</code> indicates the process was terminated, <code>0</code> otherwise.</li></ul></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.Stop 12306</code><br><code>1</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td><code>Stop</code> will return <code>1</code> if there no process with an id matching <code>pid</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="usingsystemdiagnostics"><code>UsingSystemDiagnostics</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>UsingSystemDiagnostics</code> returns the .NET namespace and dll that will be used under Windows.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>ver←APLProcess.UsingSystemDiagnostics</code></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.UsingSystemDiagnostics ⍝ under .NET Framework</code><br><code>System,System.dll</code> <br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess.UsingSystemDiagnostics ⍝ under .NET</code><br><code>System,System.Diagnostics.Process</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td>The result of <code>UsingSystemDiagnostics</code> is used to set <code>⎕USING</code> within <code>APLProcess</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_sh"><code>_SH</code></h3>
+<table>
+<tbody>
+<tr>
+<td>Description</td>
+<td><code>_SH</code> is a cover for <code>⎕SH</code> and is used within <code>APLProcess</code> primarily for non-Windows commands.</td>
+</tr>
+<tr>
+<td>Syntax</td>
+<td><code>r←APLProcess._SH cmd</code> where<ul><li><code>cmd</code> is the character vector command to execute</li><li><code>r</code> is the output from the command returned as a vector of character vectors</li></ul></td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>APLProcess._SH 'whoami'</code><br><code>pi</code></td>
+</tr>
+<tr>
+<td>Notes</td>
+<td>If a trappable error occurs when executing the command, <code>r</code> will be an empty vector.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../instance/" class="md-footer__link md-footer__link--prev" aria-label="Previous: APLProcess Instance" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              APLProcess Instance
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../samples/" class="md-footer__link md-footer__link--next" aria-label="Next: Sample Uses" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Sample Uses
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <div class="left">Made with <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener"><strong>Material for MkDocs</strong></a>.&nbsp;</div><div class="right">Contents copyright &copy;2015-2024 <strong><a href="https://dyalog.com" target="_blank" rel="noopener">Dyalog, LTD</a></strong></div>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+    
+    
+  </body>
+</html>
