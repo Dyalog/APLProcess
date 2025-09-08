@@ -5,7 +5,7 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'APLProcess' '2.3.0' '2024-07-06'
+      r←'APLProcess' '2.3.1' '2025-08-08'
     ∇
 
     :Field Public Args←''
@@ -453,7 +453,7 @@
       :If {2::0 ⋄ IsSsh}'' ⍝ instance?
           ∘∘∘
       :Else
-          →(r←' '∨.≠txt←⊃_SH'ps -o comm -p ',(⍕pid),' | sed -n ''2,$p''')↓0
+          →(r←' '∨.≠txt←⊃_SH'ps -o cmd -p ',(⍕pid),' | sed -n ''2,$p''')↓0
           r←~∨/'<defunct>'⍷txt
       :EndIf
     ∇
