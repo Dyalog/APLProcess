@@ -19,5 +19,5 @@
   source: "source/APLProcess.dyalog",
   tags: "mac-os,windows,linux,dyalog,pi",
   userCommandScript: "",
-  version: "2.3.0",
+  version: "2.3.1",
 }
