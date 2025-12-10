@@ -5,7 +5,7 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'APLProcess' '2.3.1' '2025-09-09'
+      r←'APLProcess' '2.4.0' '2025-12-09'
     ∇
 
     :Field Public Args←''
@@ -16,6 +16,8 @@
     :Field Public RunTime←0    ⍝ Boolean or name of runtime executable
     :Field Public IsSsh
     :Field Public RideInit←''
+    :Field Public Load←''
+    :Field Public Lx←''
     :Field Public OutFile←''
     :Field Public WorkingDir←''
     :Field Public Detach←0
@@ -44,11 +46,13 @@
       ⍝ {[5]} if present, a log-file prefix for process output
       ⍝ {[6]} if present, the "current directory" when APL is started
       ⍝ {[7]} if present, and set to 1, do not kill spawned process in destructor
+      ⍝ {[8]} if present, is the LOAD= setting for spawned process
+      ⍝ {[9]} if present, is the LX= setting for the spawned process
       make_common
       args←(eis⍣({9.1≠⎕NC⊂,'⍵'}⊃args)⊢args)
       :Select {⊃⎕NC⊂,'⍵'}⊃args
       :Case 2.1 ⍝ array
-          (Ws Args RunTime RideInit OutFile WorkingDir Detach)←7↑args,(⍴args)↓'' '' 0 RideInit OutFile WorkingDir Detach
+          (Ws Args RunTime RideInit OutFile WorkingDir Detach Load Lx)←9↑args,(⍴args)↓Ws Args RunTime RideInit OutFile WorkingDir Detach Load Lx
       :Case 9.1 ⍝ namespace
           :If 0∊⍴invalid←(settings←args.⎕NL ¯2.1 ¯9.1)~(⎕NEW⊃⊃⎕CLASS ⎕THIS).⎕NL ¯2.2
               args{⍎⍵,'←⍺⍎⍵'}¨settings
@@ -96,6 +100,12 @@
           args,←' RIDE_INIT="SERVE:*:',(⍕RideInit),'" RIDE_SPAWNED=1'
       :Else
           args,←' RIDE_INIT="',RideInit,'" RIDE_SPAWNED=1'
+      :EndIf
+     
+      args,←' LOAD="',Load,'"' ⍝ always set LOAD as to not inherit this process's setting
+     
+      :If ~0∊⍴Lx
+          args,←' LX="',Lx,'"'
       :EndIf
      
       :If ~0 2 6∊⍨10|⎕DR rt ⍝ if rt is character or nested, it defines what to start
@@ -377,7 +387,7 @@
       :If IsWin∨{2::0 ⋄ IsSsh}''
           r←{0::⍵ ⋄ Proc.HasExited}1
       :Else
-          Proc.HasExited←r←~UNIXIsRunning Proc.Id ⍝ AWS
+          Proc.HasExited←r←{0::⍵ ⋄ ~UNIXIsRunning Proc.Id}1 ⍝ AWS
       :EndIf
     ∇
 

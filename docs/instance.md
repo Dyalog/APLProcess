@@ -40,6 +40,21 @@ You create an instance of `APLProcess` using either `⎕NEW` or [`APLProcess.New
 | Examples | `p.RideInit←4504 ⍝ run with SERVE:*:4504`<br>`p.RideInit←'HTTP:*:4504 ⍝ run with zero-footprint RIDE on port 4504` |
 | Notes | `APLProcess` will always set the `RIDE_INIT` command line parameter in order to not inherit the setting from the parent APL process. |
 
+### `Load`
+|--|--|
+| Description | `Load` specifies the `LOAD` parameter for the child process.  `Load` specifies the workspace, folder, or file to be loaded and run by the child process. `Load`, if specified, overrides the workspace specified by `Ws`. |
+| Default | `''` |
+| Examples | `p.Load←'/home/user/myapp'` |
+| Notes | `APLProcess` will always set the `LOAD` command line parameter in order to not inherit the setting from the parent APL process.|
+
+### `Lx`
+|--|--|
+| Description | `Lx` specifies the `LX` parameter for the child process.  `Lx`, if specified, overrides `⎕LX` in the workspace, if a workspace is either specified by `Ws` or `Load`. |
+| Default | `''` which means that the child process will inherit the `LX` parameter, if any, set for the parent process. |
+| Examples | `p.Lx←'Start'` |
+| Notes | If `LX` is set for the parent process and `Lx` is not specified for the child process, the child process will inherit the parent's setting. This is likely to not be what you want.|
+
+
 ### `OutFile`
 |--|--|
 | Description | `OutFile` specifies the name of a file to which the session output of the child APL process will be written. |
