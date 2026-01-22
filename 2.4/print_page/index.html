@@ -1015,6 +1015,7 @@ Supplying <code>''</code> as the argument to <code>APLProcess.New</code> is equi
 │MAXWS│Environment variable│2GB│
 └─────┴────────────────────┴───┘
 </code></pre>
+<h3 id="instance-special-treatment-of-load-and-lx-environment-variables">Special Treatment of <code>LOAD</code> and <code>LX</code> Environment Variables.</h3>
 <p>In most cases, there is no issue with inheriting the parent's environment 
 variables. However, the <code>LOAD</code> and <code>LX</code> configuration settings present a potential problem in that they could start a recursive chain of events that would result in a universe-eating black hole. As such, if <code>APLProcess</code> detects <code>LOAD</code> and/or <code>LX</code> as environment variables in the parent process, it will remove them from the environment of the child process(es). You can specify <code>LOAD</code> and <code>LX</code> for the child process(es) using the <a href="#instance-load"><code>Load</code></a> and <a href="#instance-lx"><code>Lx</code></a> settings respectively or as a part of the <a href="#instance-args"><code>Args</code></a> setting.</p>
 <h2 id="instance-settings">Settings</h2>
@@ -1128,7 +1129,7 @@ variables. However, the <code>LOAD</code> and <code>LX</code> configuration sett
 </tr>
 <tr>
 <td>Notes</td>
-<td><code>APLProcess</code> will always set the <code>LOAD</code> command line parameter in order to not inherit the setting from the parent APL process.</td>
+<td>See <a href="#instance-special-treatment-of-load-and-lx-environment-variables">Special Treatment of LOAD and LX Environment Variables</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -1149,7 +1150,7 @@ variables. However, the <code>LOAD</code> and <code>LX</code> configuration sett
 </tr>
 <tr>
 <td>Notes</td>
-<td>If <code>LX</code> is set for the parent process and <code>Lx</code> is not specified for the child process, the child process will inherit the parent's setting. This is likely to not be what you want.</td>
+<td>See <a href="#instance-special-treatment-of-load-and-lx-environment-variables">Special Treatment of LOAD and LX Environment Variables</a>.</td>
 </tr>
 </tbody>
 </table>
