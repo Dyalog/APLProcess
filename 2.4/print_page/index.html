@@ -985,6 +985,38 @@ Supplying <code>''</code> as the argument to <code>APLProcess.New</code> is equi
                         <h1>Reference<a class='headerlink' href='#section-3' title='Permanent link'></a>
                         </h1>
                     <section class="print-page" id="instance" heading-number="3.1"><h1 id="instance-instance">APLProcess Instance</h1><p>You create an instance of <code>APLProcess</code> using either <code>⎕NEW</code> or <a href="#shared-methods-new"><code>APLProcess.New</code></a> as described in the <a href="#userguide-creating-and-starting-aplprocess">Creating and Starting APLProcess</a>. </p>
+<h2 id="instance-aplprocess-and-dyalog-apl-configuration-parameters"><code>APLProcess</code> and Dyalog APL Configuration Parameters</h2>
+<p>Dyalog APL is customized using a set of configuration parameters. These may be defined in a number of ways, which take precedence as follows:</p>
+<ul>
+<li>Command-line settings</li>
+<li>Application configuration file settings</li>
+<li>Environment variable settings</li>
+<li>User configuration file settings</li>
+<li>Settings in the registry section defined by the IniFile parameter (Windows only)</li>
+<li>Built-in defaults</li>
+</ul>
+<p>A child process will inherit the environment variable settings from the parent process. To demonstrate this in a somewhat contrived manner, suppose you started Dyalog APL from a Linux command line as follows:</p>
+<pre><code class="language-APL">MAXWS=2GB dyalog MAXWS=1GB
+</code></pre>
+<p>The <code>MAXWS</code> to the left of dyalog is an environment variable and the <code>MAXWS</code> to the right of the dyalog is a command-line setting. The <code>MAXWS</code> in the started process will be <code>1GB</code> as command-line settings take precedence over environment variables.</p>
+<p>However, if you use <code>APLProcess</code> to start a child process, it will inherit the <code>2GB</code> environment variable setting.</p>
+<p>In the parent process:</p>
+<pre><code class="language-APL">      ]config MAXWS -origin
+┌─────┬────────────┬───┐
+│MAXWS│Command line│1GB│
+└─────┴────────────┴───┘
+      ]load APLProcess
+      p←APLProcess.New ''
+      p.Run
+</code></pre>
+<p>In the child process:</p>
+<pre><code class="language-APL">      ]config MAXWS -origin
+┌─────┬────────────────────┬───┐
+│MAXWS│Environment variable│2GB│
+└─────┴────────────────────┴───┘
+</code></pre>
+<p>In most cases, there is no issue with inheriting the parent's environment 
+variables. However, the <code>LOAD</code> and <code>LX</code> configuration settings present a potential problem in that they could start a recursive chain of events that would result in a universe-eating black hole. As such, if <code>APLProcess</code> detects <code>LOAD</code> and/or <code>LX</code> as environment variables in the parent process, it will remove them from the environment of the child process(es). You can specify <code>LOAD</code> and <code>LX</code> for the child process(es) using the <a href="#instance-load"><code>Load</code></a> and <a href="#instance-lx"><code>Lx</code></a> settings respectively or as a part of the <a href="#instance-args"><code>Args</code></a> setting.</p>
 <h2 id="instance-settings">Settings</h2>
 <p><code>APLProcess</code>'s settings can be provided as arguments to  <code>APLProcess.New</code> or <code>⎕NEW</code>. You can also specify settings in the <code>APLProcess</code> instance before launching the new process. When provided as arguments, the settings can be specified in two ways.</p>
 <ol>
