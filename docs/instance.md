@@ -1,5 +1,44 @@
 You create an instance of `APLProcess` using either `⎕NEW` or [`APLProcess.New`](shared-methods.md#new) as described in the [Creating and Starting APLProcess](./userguide.md#creating-and-starting-aplprocess). 
 
+## `APLProcess` and Dyalog APL Configuration Parameters
+Dyalog APL is customized using a set of configuration parameters. These may be defined in a number of ways, which take precedence as follows:
+
+* Command-line settings
+* Application configuration file settings
+* Environment variable settings
+* User configuration file settings
+* Settings in the registry section defined by the IniFile parameter (Windows only)
+* Built-in defaults
+
+A child process will inherit the environment variable settings from the parent process. To demonstrate this in a somewhat contrived manner, suppose you started Dyalog APL from a Linux command line as follows:
+
+```APL
+MAXWS=2GB dyalog MAXWS=1GB
+```
+The `MAXWS` to the left of dyalog is an environment variable and the `MAXWS` to the right of the dyalog is a command-line setting. The `MAXWS` in the started process will be `1GB` as command-line settings take precedence over environment variables.
+
+However, if you use `APLProcess` to start a child process, it will inherit the `2GB` environment variable setting.
+
+In the parent process:
+```APL
+      ]config MAXWS -origin
+┌─────┬────────────┬───┐
+│MAXWS│Command line│1GB│
+└─────┴────────────┴───┘
+      ]load APLProcess
+      p←APLProcess.New ''
+      p.Run
+```
+In the child process:
+```APL
+      ]config MAXWS -origin
+┌─────┬────────────────────┬───┐
+│MAXWS│Environment variable│2GB│
+└─────┴────────────────────┴───┘
+```
+In most cases, there is no issue with inheriting the parent's environment 
+variables. However, the `LOAD` and `LX` configuration settings present a potential problem in that they could start a recursive chain of events that would result in a universe-eating black hole. As such, if `APLProcess` detects `LOAD` and/or `LX` as environment variables in the parent process, it will remove them from the environment of the child process(es). You can specify `LOAD` and `LX` for the child process(es) using the [`Load`](#load) and [`Lx`](#lx) settings respectively or as a part of the [`Args`](#args) setting.
+
 ## Settings
 `APLProcess`'s settings can be provided as arguments to  `APLProcess.New` or `⎕NEW`. You can also specify settings in the `APLProcess` instance before launching the new process. When provided as arguments, the settings can be specified in two ways.
 
