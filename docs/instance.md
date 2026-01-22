@@ -36,6 +36,7 @@ In the child process:
 │MAXWS│Environment variable│2GB│
 └─────┴────────────────────┴───┘
 ```
+### Special Treatment of `LOAD` and `LX` Environment Variables.
 In most cases, there is no issue with inheriting the parent's environment 
 variables. However, the `LOAD` and `LX` configuration settings present a potential problem in that they could start a recursive chain of events that would result in a universe-eating black hole. As such, if `APLProcess` detects `LOAD` and/or `LX` as environment variables in the parent process, it will remove them from the environment of the child process(es). You can specify `LOAD` and `LX` for the child process(es) using the [`Load`](#load) and [`Lx`](#lx) settings respectively or as a part of the [`Args`](#args) setting.
 
@@ -84,14 +85,14 @@ variables. However, the `LOAD` and `LX` configuration settings present a potenti
 | Description | `Load` specifies the `LOAD` parameter for the child process.  `Load` specifies the workspace, folder, or file to be loaded and run by the child process. `Load`, if specified, overrides the workspace specified by `Ws`. |
 | Default | `''` |
 | Examples | `p.Load←'/home/user/myapp'` |
-| Notes | `APLProcess` will always set the `LOAD` command line parameter in order to not inherit the setting from the parent APL process.|
+| Notes | See [Special Treatment of LOAD and LX Environment Variables](#special-treatment-of-load-and-lx-environment-variables). |
 
 ### `Lx`
 |--|--|
 | Description | `Lx` specifies the `LX` parameter for the child process.  `Lx`, if specified, overrides `⎕LX` in the workspace, if a workspace is either specified by `Ws` or `Load`. |
 | Default | `''` which means that the child process will inherit the `LX` parameter, if any, set for the parent process. |
 | Examples | `p.Lx←'Start'` |
-| Notes | If `LX` is set for the parent process and `Lx` is not specified for the child process, the child process will inherit the parent's setting. This is likely to not be what you want.|
+| Notes | See [Special Treatment of LOAD and LX Environment Variables](#special-treatment-of-load-and-lx-environment-variables).|
 
 
 ### `OutFile`
