@@ -1010,7 +1010,7 @@
 <li>Settings in the registry section defined by the IniFile parameter (Windows only)</li>
 <li>Built-in defaults</li>
 </ul>
-<p>A child process will inherit the environment variable settings from the parent process. To demonstrate this in a somewhat contrived manner, suppose you started Dyalog APL from a Linux command line as follows:</p>
+<p>A child process will inherit the environment variable settings from the parent process. To demonstrate this in a somewhat contrived manner, suppose you started Dyalog APL from a Linux/MacOS command line as follows:</p>
 <pre><code class="language-APL">MAXWS=2GB dyalog MAXWS=1GB
 </code></pre>
 <p>The <code>MAXWS</code> to the left of dyalog is an environment variable and the <code>MAXWS</code> to the right of the dyalog is a command-line setting. The <code>MAXWS</code> in the started process will be <code>1GB</code> as command-line settings take precedence over environment variables.</p>
