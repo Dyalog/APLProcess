@@ -5,7 +5,7 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'APLProcess' '2.4.0' '2025-12-09'
+      r←'APLProcess' '2.4.1' '2026-01-22'
     ∇
 
     :Field Public Args←''
@@ -91,7 +91,7 @@
       :EndTrap
     ∇
 
-    ∇ Start(ws args rt);psi;pid;cmd;host;port;keyfile;exe;z;output
+    ∇ Start(ws args rt);psi;pid;cmd;host;port;keyfile;exe;z;output;suppressLx;suppressLoad;suppress
       (Ws Args)←ws args
      
       :If 0∊⍴RideInit ⍝ Always set RIDE_INIT so that started process does not inherit this process's setting
@@ -102,7 +102,11 @@
           args,←' RIDE_INIT="',RideInit,'" RIDE_SPAWNED=1'
       :EndIf
      
-      args,←' LOAD="',Load,'"' ⍝ always set LOAD as to not inherit this process's setting
+      (suppressLoad suppressLx)←1=source'LOAD' 'LX' ⍝ if LOAD or LX are environment variables for parent, suppress them for child processes
+     
+      :If ~0∊⍴Load
+          args,←' LOAD="',Load,'"'
+      :EndIf
      
       :If ~0∊⍴Lx
           args,←' LX="',Lx,'"'
@@ -122,15 +126,15 @@
           psi←⎕NEW Diagnostics.ProcessStartInfo,⊂Exe(ws,' ',args)
           psi.WindowStyle←Diagnostics.ProcessWindowStyle.Minimized
           psi.WorkingDirectory←WorkingDir
+          psi.UseShellExecute←0
      
           :If ~0∊⍴OutFile
-              psi.UseShellExecute←0        ⍝ this needs to be false to redirect IO (.NET Core defaults to false, .NET Framework defaults to true)
               psi.StandardOutputEncoding←Text.Encoding.UTF8
               psi.RedirectStandardOutput←1 ⍝ redirect standard output
-          :Else
-              psi.RedirectStandardOutput←0
-              psi.UseShellExecute←1
           :EndIf
+     
+          :If suppressLoad ⋄ {}psi.Environment.Remove⊂'LOAD' ⋄ :EndIf
+          :If suppressLx ⋄ {}psi.Environment.Remove⊂'LX' ⋄ :EndIf
      
           Proc←Diagnostics.Process.Start psi
      
@@ -140,6 +144,9 @@
           :EndIf
      
           cmd←(~0∊⍴WorkingDir)/'cd ',WorkingDir,'; '
+          suppress←suppressLoad/'unset LOAD; '
+          suppress,←suppressLx/'unset LX; '
+     
           :If IsSsh
               (host port keyfile exe)←Exe
               cmd,←args,' ',exe,' +s -q ',ws
@@ -147,7 +154,7 @@
           :Else
               z←⍕GetCurrentProcessId
               output←(1+×≢OutFile)⊃'/dev/null'OutFile
-              cmd,←'{ ',args,' ',Exe,' +s -q ',ws,' -c APLppid=',z,' </dev/null >',output,' 2>&1 & } ; echo $!'
+              cmd,←'{ ',suppress,args,' ',Exe,' +s -q ',ws,' -c APLppid=',z,' </dev/null >',output,' 2>&1 & } ; echo $!'
               pid←tonum⊃_SH cmd
               Proc.Id←pid
               Proc.HasExited←HasExited
@@ -618,6 +625,21 @@
     deb←{1↓¯1↓{⍵/⍨~'  '⍷⍵}' ',⍵,' '} ⍝ delete extraneous blanks
     part←{⍵⊆⍨~⍺{⍵∧⍺>+\⍵}' '=⍵} ⍝ partition first ⍺ sections
     nameClass←{⎕NC⊂,'⍵'} ⍝ name class of argument
+
+    ∇ r←source setting
+    ⍝ returns the source of a setting
+    ⍝ 0 - not defined
+    ⍝ 1 - environment variable
+    ⍝ 2 - command line
+    ⍝ 3 - windows registry
+    ⍝ 4 - configuration file
+      :Access public shared
+      :If 1<|≡setting
+          r←source¨setting
+      :Else
+          r←¯1+'not' 'env' 'com' 'reg'⍳⊂⎕C 3↑2⊃160⌶setting
+      :EndIf
+    ∇
 
     ∇ r←IsWin
       :Access public shared
