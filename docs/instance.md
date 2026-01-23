@@ -10,7 +10,7 @@ Dyalog APL is customized using a set of configuration parameters. These may be d
 * Settings in the registry section defined by the IniFile parameter (Windows only)
 * Built-in defaults
 
-A child process will inherit the environment variable settings from the parent process. To demonstrate this in a somewhat contrived manner, suppose you started Dyalog APL from a Linux command line as follows:
+A child process will inherit the environment variable settings from the parent process. To demonstrate this in a somewhat contrived manner, suppose you started Dyalog APL from a Linux/MacOS command line as follows:
 
 ```APL
 MAXWS=2GB dyalog MAXWS=1GB
