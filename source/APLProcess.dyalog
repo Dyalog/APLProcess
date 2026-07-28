@@ -35,7 +35,7 @@
       make_common
     ∇
 
-    ∇ make1 args;rt;cmd;ws;params;ns;invalid;settings
+    ∇ make1 args;rt;cmd;ws;params;ns;invalid;settings;rc;msg
       :Access Public Instance
       :Implements Constructor
       ⍝ args is:
@@ -61,7 +61,10 @@
       :Else ⋄ 'Invalid constructor argument'⎕SIGNAL 11
       :EndSelect
       :If 'New'≢2⊃⎕SI,⊂'' ⍝ do not autostart if using APLProcess.New
-          {}Run
+          (rc msg)←Run
+          :If rc≠0 
+              ('APLProcess: failed to start process (Exe="',Exe,'", Args="',Args,'"): EN=',(⍕rc),', ',msg)⎕SIGNAL 11
+          :EndIf
       :EndIf
     ∇
 
@@ -87,7 +90,8 @@
       :Trap rc←0
           Start(Ws Args RunTime)
       :Else
-          (rc msg)←⎕DMX.(EN EM)
+          rc←⎕DMX.EN
+          msg←⎕JSON ⎕DMX ⍝ full diagnostic (incl. DM with failing line + caret) so the real site of the error in Start is visible upstream
       :EndTrap
     ∇
 
