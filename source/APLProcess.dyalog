@@ -63,7 +63,7 @@
       :If 'New'≢2⊃⎕SI,⊂'' ⍝ do not autostart if using APLProcess.New
           (rc msg)←Run
           :If rc≠0 
-              ('APLProcess: failed to start process (Exe="',Exe,'", Args="',Args,'"): EN=',(⍕rc),', ',msg)⎕SIGNAL 11
+              ('APLProcess: failed to start process (Exe="',Exe,'", Args="',Args,'"): EN=',(⍕rc),', ',msg)⎕SIGNAL rc
           :EndIf
       :EndIf
     ∇
