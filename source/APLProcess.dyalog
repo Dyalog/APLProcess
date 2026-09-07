@@ -5,7 +5,7 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'APLProcess' '2.4.1' '2026-01-22'
+      r←'APLProcess' '2.4.2' '2026-09-07'
     ∇
 
     :Field Public Args←''
